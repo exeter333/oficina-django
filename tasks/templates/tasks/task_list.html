@@ -19,6 +19,7 @@
           </form>
         {% endif %}
         <span class="{% if task.completed %}done{% endif %}">{{ task.title }}</span>
+        <small>({{ task.get_priority_display }})</small>
         {% url 'task_delete' task.pk as delete_url %}
         {% if delete_url %}
           <form class="inline" method="post" action="{{ delete_url }}">

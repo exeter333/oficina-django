@@ -13,7 +13,8 @@ def task_create(request):
     if request.method == "POST":
         title = request.POST.get("title", "").strip()
         if title:
-            Task.objects.create(title=title)
+            priority = int(request.POST.get("priority", 2))
+            Task.objects.create(title=title, priority=priority)
         return redirect("task_list")
     return render(request, "tasks/task_form.html")
 

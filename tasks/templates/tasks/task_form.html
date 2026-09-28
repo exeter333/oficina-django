@@ -4,6 +4,11 @@
   <form method="post">
     {% csrf_token %}
     <input type="text" name="title" placeholder="O que precisa ser feito?" required autofocus>
+    <select name="priority">
+      <option value="1">Baixa</option>
+      <option value="2" selected>Média</option>
+      <option value="3">Alta</option>
+    </select>
     <button type="submit">Adicionar</button>
   </form>
   <p><a href="{% url 'task_list' %}">← Voltar</a></p>
