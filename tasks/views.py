@@ -1,4 +1,5 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 
 from .models import Task
 
@@ -15,3 +16,18 @@ def task_create(request):
             Task.objects.create(title=title)
         return redirect("task_list")
     return render(request, "tasks/task_form.html")
+
+
+@require_POST
+def task_toggle(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.completed = not task.completed
+    task.save()
+    return redirect("task_list")
+
+
+@require_POST
+def task_delete(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return redirect("task_list")
